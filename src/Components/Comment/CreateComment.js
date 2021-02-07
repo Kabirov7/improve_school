@@ -102,7 +102,7 @@ const CreateComment = () => {
 			isSubject = false
 		}
 
-		if (message.length >= 100) {
+		if (message.length >= 50) {
 			isMessage = false
 		}
 
@@ -129,21 +129,14 @@ const CreateComment = () => {
 						label="School"
 						id="school"
 						returnAnswer={returnSchool}
-						helperText="School name (ШГ №1, ШГ #1)"
-						InputProps={{
-							startAdornment: <InputAdornment position="start">School</InputAdornment>,
-						}}
 					/>
 				</Grid>
 				<Grid item xs={4}>
 					<TextInput
-						label="Subject"
+						label="Тема"
 						id="subject"
 						returnAnswer={returnSubject}
 						helperText="HashTag (#lovlymath)"
-						InputProps={{
-							startAdornment: <InputAdornment position="start">School</InputAdornment>,
-						}}
 					/>
 				</Grid>
 			</Grid>
@@ -152,18 +145,18 @@ const CreateComment = () => {
 					<TextField
 						style={{margin: 20}}
 						id={"message"}
-						label="Message"
+						label="История"
 						value={message}
 						onChange={returnMessage}
 						multiline
 						rows={5}
 						variant="outlined"
-						helperText={`Length of the text(${message.length}) must be > 100 chars`}
+						helperText={`Длина текста(${message.length}) должна быть > 50 символов`}
 						fullWidth
 					/>
 				</Grid>
 				<Grid item xs={9}>
-					{!availableWrite ? <Typography> Вы уже писали сообщение сегодня</Typography> : <div></div>}
+					{!availableWrite ? <Typography> Вы уже рассказывали историю сегодня</Typography> : <div></div>}
 				</Grid>
 			</Grid>
 			<Grid container spacing={3}>
@@ -171,7 +164,7 @@ const CreateComment = () => {
 					<Button variant="contained" color="primary"
 									onClick={() => saveComment()}
 					>
-						Comment
+						Оставить историю
 					</Button>
 				</Grid>
 			</Grid>
@@ -180,7 +173,7 @@ const CreateComment = () => {
 				<Grid item xs={9}>
 					<Button color="primary" className="px-4"
 									onClick={routeChange}>
-						Watch all comments
+						Посмотреть все истории
 					</Button>
 				</Grid>
 			</Grid>
