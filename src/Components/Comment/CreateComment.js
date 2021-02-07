@@ -122,7 +122,7 @@ const CreateComment = () => {
 	}
 
 	return (
-		<div>
+		<div style={{marginTop:40}}>
 			<Grid container spacing={3}>
 				<Grid item xs={4}>
 					<TextInput
