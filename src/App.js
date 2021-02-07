@@ -1,25 +1,30 @@
-import logo from './logo.svg';
 import './App.css';
+import {
+	BrowserRouter as Router,
+	Route, Switch,
+} from "react-router-dom";
+import {AuthContext, AuthProvider} from "./util/Auth";
+import firebase, { signInWithGoogle } from './util/firebase'
+import LogIn from "./Components/Auth/LogIn"
+import CreateComment from "./Components/Comment/CreateComment"
+import Comments from "./Components/Comment/Comments"
+import PrivateRoute from "./Components/Auth/PrivateRoute";
+import Button from "@material-ui/core/Button";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	return (
+		<AuthProvider>
+			<Router>
+				<div className="App">
+					<PrivateRoute exact path={"/improve_school"} component={CreateComment}/>
+					<Route exact path={"/comments"} component={Comments}/>
+					<Route exact path={"/login"} component={LogIn}/>
+				</div>
+			</Router>
+		</AuthProvider>
+
+);
 }
 
 export default App;
