@@ -32,10 +32,7 @@ const TextInput = (props) => {
 			id={props.id}
 			onChange={handleChange}
 			value={value}
-			helperText={props.helperText}
-			InputProps={{
-				startAdornment: <InputAdornment position="start">{props.label}</InputAdornment>,
-			}}
+
 		/>)
 }
 

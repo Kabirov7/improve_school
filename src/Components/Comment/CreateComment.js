@@ -102,11 +102,10 @@ const CreateComment = () => {
 			isSubject = false
 		}
 
-		if (message.length >= 140) {
+		if (message.length >= 100) {
 			isMessage = false
 		}
 
-		console.log('is it able =>', availableWrite)
 		if (!isSubject && !isMessage && availableWrite && !save) {
 			db.collection("messages").doc().set(data).then()
 			db.collection("users").doc(currentUser.uid).set({
@@ -159,7 +158,7 @@ const CreateComment = () => {
 						multiline
 						rows={5}
 						variant="outlined"
-						helperText={`Length of the text(${message.length}) must be > 140 char`}
+						helperText={`Length of the text(${message.length}) must be > 100 chars`}
 						fullWidth
 					/>
 				</Grid>
