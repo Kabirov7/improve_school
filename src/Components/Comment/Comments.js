@@ -18,7 +18,7 @@ const Comments = () => {
 
 	useEffect(() => {
 		let db = firebase.firestore();
-		db.collection("messages").orderBy("created")
+		db.collection("messages").orderBy("created", "desc")
 			.onSnapshot(function (querySnapshot) {
 				let items = [];
 				querySnapshot.forEach(function (doc) {

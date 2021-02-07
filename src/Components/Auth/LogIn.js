@@ -24,7 +24,7 @@ const LogIn = ({history}) => {
 	return (
 		<div>
 			<Button className={classes.button} onClick={() => signInWithGoogle()} variant="contained" color="secondary">
-				Secondary
+				Log in
 			</Button>
 			<Typography className={classes.title} color={"textSecondary"} component={'p'}>
 				Данное веб приложение созданно для того чтобы любой ученик или учащийся мог рассказать что-то про его школу. Всё 100% анонимно. <br/>
