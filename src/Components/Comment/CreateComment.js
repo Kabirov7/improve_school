@@ -146,7 +146,7 @@ const CreateComment = () => {
 				<Grid justify="center" className={classes.root} container spacing={3}>
 					<Grid item xs={3}>
 						<TextInput
-							label="Nick Name"
+							label="Nick"
 							id="nick"
 							returnAnswer={returnNick}
 						/>
@@ -172,7 +172,6 @@ const CreateComment = () => {
 				<Grid container justify="center" className={classes.root} spacing={3}>
 					<Grid item xs={8}>
 						<TextField
-							style={{margin: 20}}
 							id={"message"}
 							label="История"
 							value={message}
