@@ -1,6 +1,6 @@
 import React, {useCallback, useContext} from "react";
 import {withRouter, Redirect} from "react-router";
-import app, {signInWithGoogle} from "../../util/firebase";
+import app, {signInAnonymously} from "../../util/firebase";
 import {AuthContext} from "../../util/Auth";
 import {Button, Typography} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
@@ -23,7 +23,7 @@ const LogIn = ({history}) => {
 
 	return (
 		<div>
-			<Button className={classes.button} onClick={() => signInWithGoogle()} variant="contained" color="secondary">
+			<Button className={classes.button} onClick={() => signInAnonymously()} variant="contained" color="secondary">
 				Log in
 			</Button>
 			<Typography className={classes.title} color={"textSecondary"} component={'p'}>

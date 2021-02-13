@@ -13,10 +13,21 @@ import {red} from "@material-ui/core/colors";
 import {useHistory} from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
-	createStyles({}),
+	createStyles({
+		root: {
+			flexGrow: 1,
+		},
+		paper: {
+			height: 140,
+			width: 100,
+		},
+		control: {
+			padding: theme.spacing(2),
+		},
+	}),
 );
-
 const CreateComment = () => {
+	const [nick, setNick] = useState("")
 	const [school, setSchool] = useState("")
 	const [message, setMessage] = useState("")
 	const [subject, setSubject] = useState("")
@@ -28,7 +39,7 @@ const CreateComment = () => {
 
 	const history = useHistory();
 
-	useEffect(() => {
+	/*useEffect(() => {
 		const db = firebase.firestore()
 		const usersRef = db.collection('users').doc(currentUser.uid)
 
@@ -49,26 +60,30 @@ const CreateComment = () => {
 					setAvailableWrite(true)
 
 				}
-			});
+			});*/
 
-		/*firebase.firestore().collection('users').doc(currentUser.uid + "1232").get()
-			.then(doc => {
-				let d = new Date() > doc.data()['lastWrite'].toDate()
-				setAvailableWrite(d)
-				console.log("ddd => ", d)
-				console.log("setAvailableWrite => ", availableWrite)
-			})*/
-	}, [])
+	/*firebase.firestore().collection('users').doc(currentUser.uid + "1232").get()
+		.then(doc => {
+			let d = new Date() > doc.data()['lastWrite'].toDate()
+			setAvailableWrite(d)
+			console.log("ddd => ", d)
+			console.log("setAvailableWrite => ", availableWrite)
+		})
+}, [])*/
 
-	useEffect(() => {
-		firebase.firestore().collection('users').doc(currentUser.uid).get()
-			.then(doc => {
-				let d = new Date() > doc.data()['lastWrite'].toDate()
-				setAvailableWrite(d)
-				console.log("ddd => ", d)
-				console.log("setAvailableWrite => ", availableWrite)
-			})
-	}, [save])
+	/*	useEffect(() => {
+			firebase.firestore().collection('users').doc(currentUser.uid).get()
+				.then(doc => {
+					let d = new Date() > doc.data()['lastWrite'].toDate()
+					setAvailableWrite(d)
+					console.log("ddd => ", d)
+					console.log("setAvailableWrite => ", availableWrite)
+				})
+		}, [save])*/
+
+	const returnNick = (answer) => {
+		setNick(answer)
+	}
 
 	const returnSchool = (answer) => {
 		setSchool(answer)
@@ -106,10 +121,10 @@ const CreateComment = () => {
 			isMessage = false
 		}
 
-		if (!isSubject && !isMessage && availableWrite && !save) {
+		if (!isSubject && !isMessage) {
 			db.collection("messages").doc().set(data).then()
 			db.collection("users").doc(currentUser.uid).set({
-				email: currentUser.email,
+				nickname: nick,
 				lastWrite: firebase.firestore.Timestamp.fromDate(date)
 			})
 			console.log('save')
@@ -117,49 +132,61 @@ const CreateComment = () => {
 		}
 	}
 
+	const reloadPage = () => {
+		return <Redirect to='/login/fsadfas'  />
+	}
+
 	const routeChange = () => {
 		history.push('/comments')
 	}
 
 	return (
-		<div style={{marginTop:40}}>
-			<Grid container spacing={3}>
-				<Grid item xs={4}>
-					<TextInput
-						label="School"
-						id="school"
-						returnAnswer={returnSchool}
-					/>
+		<div style={{marginTop: 40}}>
+			<div>
+				<Grid justify="center" className={classes.root} container spacing={3}>
+					<Grid item xs={3}>
+						<TextInput
+							label="Nick Name"
+							id="nick"
+							returnAnswer={returnNick}
+						/>
+					</Grid>
+					<Grid item xs={3}>
+						<TextInput
+							label="School"
+							id="school"
+							returnAnswer={returnSchool}
+						/>
+					</Grid>
+					<Grid item xs={3}>
+						<TextInput
+							label="Тема"
+							id="subject"
+							returnAnswer={returnSubject}
+							helperText="HashTag (#lovlymath)"
+						/>
+					</Grid>
 				</Grid>
-				<Grid item xs={4}>
-					<TextInput
-						label="Тема"
-						id="subject"
-						returnAnswer={returnSubject}
-						helperText="HashTag (#lovlymath)"
-					/>
+			</div>
+			<div>
+				<Grid container justify="center" className={classes.root} spacing={3}>
+					<Grid item xs={8}>
+						<TextField
+							style={{margin: 20}}
+							id={"message"}
+							label="История"
+							value={message}
+							onChange={returnMessage}
+							multiline
+							rows={5}
+							variant="outlined"
+							helperText={`Длина текста(${message.length}) должна быть > 50 символов`}
+							fullWidth
+						/>
+					</Grid>
 				</Grid>
-			</Grid>
-			<Grid container spacing={3}>
-				<Grid item xs={9}>
-					<TextField
-						style={{margin: 20}}
-						id={"message"}
-						label="История"
-						value={message}
-						onChange={returnMessage}
-						multiline
-						rows={5}
-						variant="outlined"
-						helperText={`Длина текста(${message.length}) должна быть > 50 символов`}
-						fullWidth
-					/>
-				</Grid>
-				<Grid item xs={9}>
-					{!availableWrite ? <Typography> Вы уже рассказывали историю сегодня</Typography> : <div></div>}
-				</Grid>
-			</Grid>
-			<Grid container spacing={3}>
+			</div>
+			<Grid  justify="center" container spacing={3}>
 				<Grid item xs={9}>
 					<Button variant="contained" color="primary"
 									onClick={() => saveComment()}
@@ -169,7 +196,7 @@ const CreateComment = () => {
 				</Grid>
 			</Grid>
 
-			<Grid container style={{marginTop: 30}} spacing={15}>
+			<Grid  justify="center" container style={{marginTop: 30}} spacing={15}>
 				<Grid item xs={9}>
 					<Button color="primary" className="px-4"
 									onClick={routeChange}>
@@ -178,7 +205,7 @@ const CreateComment = () => {
 				</Grid>
 			</Grid>
 
-			<Grid container style={{marginTop: 30}} spacing={15}>
+			<Grid  justify="center" container style={{marginTop: 30}} spacing={15}>
 				<Grid item xs={9}>
 					<Button onClick={() => firebase.auth().signOut()}>Log out</Button>
 				</Grid>

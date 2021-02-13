@@ -35,6 +35,8 @@ const Item = (props) => {
 			<Card>
 				<CardContent>
 					<Typography className={classes.title} color="black" gutterBottom>
+						Nick: {props.nickname}
+					</Typography><Typography className={classes.title} color="black" gutterBottom>
 						School: {props.school}
 					</Typography>
 					<Typography className={classes.title} color="black" gutterBottom>
